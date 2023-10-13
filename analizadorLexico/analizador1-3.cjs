@@ -1,12 +1,12 @@
 function analizador(){ 
-    let string = "select * from school "
-	let stringWords = []
+//    let string = "select * from school "
+    let string = "select * from school where id = 10 "
+    let stringWords = []
 	let word = []
 	let spaces = []
 	for(let i = 0; i < string.length; i++){
 		if(string[i] == ' '){
 			spaces.push(i)
-            console.log(`spaces length: ${spaces.length}`)
             if(spaces.length == 1){
 			    for(let j = 0; j < spaces[0]; j++){
 				    word.push(string[j])
@@ -16,11 +16,10 @@ function analizador(){
 				    word.push(string[p])
 			    }
             } else{
-			    for(let h = spaces[spaces.length - 1]; h < string[string.length -1]; h++){
+			    for(let h = spaces[spaces.length -1]; h < string[string.length -1]; h++){
 				    word.push(string[h])
 			    }
             }
-            console.log(word)
 			let result = word.join('')
 			stringWords.push(result)
 			stringWords.push(string[i])
