@@ -1,5 +1,6 @@
 function analizador(){ 
 //    let string = "select * from school "
+    let specialChar = ["'",'"',"\\","%","_","?","`",",",";",]
     let string = "select * from school where id = 10 "
     let stringWords = []
 	let word = []
@@ -12,11 +13,11 @@ function analizador(){
 				    word.push(string[j])
 			    }
             } else if(spaces.length > 1){
-			    for(let p = spaces[spaces.length - 2]; p < spaces[spaces.length -1]; p++){
+			    for(let p = spaces[spaces.length - 2]+1; p < spaces[spaces.length -1]; p++){
 				    word.push(string[p])
 			    }
             } else{
-			    for(let h = spaces[spaces.length -1]; h < string[string.length -1]; h++){
+			    for(let h = spaces[spaces.length -1]+1; h < string[string.length -1]; h++){
 				    word.push(string[h])
 			    }
             }
