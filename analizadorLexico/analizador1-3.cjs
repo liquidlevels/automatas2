@@ -1,3 +1,8 @@
+/* author: Luis Emmanuel Lopez Ortiz, 20760619
+ * First version of the code, it only split the words using join() for 
+ * putting together the characters between two blank spaces
+ * */
+
 function analizador(){ 
 //    let string = "select * from school "
     let specialChar = ["'",'"',"\\","%","_","?","`",",",";",]
@@ -6,7 +11,8 @@ function analizador(){
 	let word = []
 	let spaces = []
 	for(let i = 0; i < string.length; i++){
-		if(string[i] == ' '){
+        
+        if(string[i] == ' '){
 			spaces.push(i)
             if(spaces.length == 1){
 			    for(let j = 0; j < spaces[0]; j++){
@@ -28,7 +34,6 @@ function analizador(){
 		}
 	}
 	console.log(stringWords)
-    console.log(spaces)
 }
 
 analizador()
