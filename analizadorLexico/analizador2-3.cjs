@@ -8,39 +8,71 @@ const fs = require('fs')
 
 function isSpecialCharacter(letter){
         if(special_char.some(character => character == letter) == true){
-            console.log(letter)
-            validated_query.push(letter)
-        } else{return}
+            return true
+        } else{return false}
 }
 
 function isLetterFromAlphabet(letter){
     if(alphabet.some(character => character == letter) == true){
-        console.log(letter)
-        validated_query.push(letter)
-    }else {return}
+        return true
+    }else {return false}
 }
 
 function isNumber(num){
     if(number.some(character => character == num) == true){
-        console.log(num)
-        validated_query.push(num)
-    } else{return}
+        return true;
+    } else{return false}
 }
-/*
+
 function main(){
-    fs.readFile('query.txt', 'utf8', (err, data)) => {
+    fs.readFile('query.txt', 'utf8', (err, data) => {
         if(err){
             console.log(err)
             return
         }
-    }
-    var cadena_split = data.split('\n')
-    var validar_length = cadena_split[0].length
-    
+        var cadena_split = data.split('\n')
+        var splited_line;
+        //var validar_length = cadena_split[0].length
+        cadena_split.pop()
+        console.log(cadena_split)
+        for(let i = 0; cadena_split.length-1; i++){
+            console.log(cadena_split[i])
+            splited_line = cadena_split[i].split("")
+            console.log(splited_line)
+            /*
+            for(let n = 0; n < splited_line.length; i++){
+                if(isLetterFromAlphabet(splited_line[n])){
+                    validated_query.push(splited_line[n])
+                } else if(isSpecialCharacter(splited_line[n])){
+                    validated_query.push(splited_line[n])
+                } else if(isNumber(splited_line[n])){
+                    validated_query.push(splited_line[n])
+                } else {
+                    console.log('error, no valido')
+                }
+            }
+            */
+        }
+        //console.log(validated_query)
+        /*
+        for(let i = 0; i < cadena_split[n].length-1; i++){
+            if(validar_length == cadena_split[i].length){
+                if(isLetterFromAlphabet(cadena_split[i])){
+                    validated_query.push(cadena_split[i])
+                } else if(isSpecialCharacter(cadena_split[i])){
+                    validated_query.push(cadena_split[i])
+                } else if(isNumber(cadena_split[i])){
+                    validated_query.push(cadena_split[i])
+                } else {
+                    console.log('error, no valido')
+                }
+            }
+        }
+        */
+        
+        //console.log(cadena_split)
+        //console.log(splited_line)
+    });
 }
-*/
-isSpecialCharacter('0')
-isLetterFromAlphabet('a')
-isNumber('a')
 
-console.log(validated_query)
+main()
