@@ -37,13 +37,16 @@ function wordsWithSense(some_shit_array){
             making_some_words.push(some_shit_array[i])
             console.log(`character: [${some_shit_array[i]}]`)
             console.log(`making some words: [${making_some_words}]`)
-            console.log(`iteration: ${i}`)
-            
+            //primero no jalaba, despues utilice el "continue" para que continue con la siguiente iteracion y jalo xd
+            //algo mas tecnico seria que si i+1 == "_" hace un push a making_some_words y despues continuara con la siguiente
+            //iteracion, por lo que ya lo tomara como parte de la palabra y seguira con las validaciones en la siguiente iteracion
             if(some_shit_array[i+1] == "_"){
                 making_some_words.push(some_shit_array[i+1])
                 continue
             }
-
+            //en este caso, si i+1 es un espacio, tomara todo lo anterior que se agrego a making_some_words y lo va a juntar con join("") y asi
+            //formara una palabra, despues esta el caso de que si el siguiente es diferente a una letra, pues tampoco tiene sentido seguir agregando
+            //a making_some_words :)
             if(some_shit_array[i+1] == " " || isLetterFromAlphabet(some_shit_array[i+1]) == false){
                 result = making_some_words.join("")
                 string_words.push(result)
