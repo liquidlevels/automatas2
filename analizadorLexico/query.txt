@@ -1,1 +1,2 @@
-select * from school where name = 'leunamme'
+SELECT * FROM
+    school_trash_madafaka WHERE id = 'caca';
