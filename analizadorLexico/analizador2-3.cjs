@@ -7,6 +7,8 @@ var validated_query = []
 var making_some_words = []
 var splited_string
 var splited_line
+var result
+var string_words = []
 const fs = require('fs')
 /*
 *Las funciones basicamente regresan true si es que el caracter que reciben como parametro esta dentro de alguno de los arrays de numeros, letras o
@@ -28,10 +30,8 @@ function isNumber(num){
    return number.some(character => character == num) == true ? true :
         false
 }
-
+/*
 function wordsWithSense(some_shit_array){
-    let result
-    let string_words = []
     for(let i = 0; i < some_shit_array.length; i++){
         if(isLetterFromAlphabet(some_shit_array[i]) == true){
             making_some_words.push(some_shit_array[i])
@@ -56,7 +56,39 @@ function wordsWithSense(some_shit_array){
         }
     }
 }
+*/
 
+function validations(splited_line){
+    for(let n = 0; n < splited_line.length; n++){
+        if(isLetterFromAlphabet(splited_line[n]) == true){
+            making_some_words.push(splited_line[n])
+            console.log(`character: [${splited_line[n]}]`)
+            console.log(`making some words: [${making_some_words}]`)
+            if(splited_line[n+1] == "_"){
+                making_some_words.push(splited_line[n+1])
+                //utilice splice para quitar del array el "_" y que no lo agregue por separado y se duplique
+                splited_line.splice(n+1,1) //(n+1 es el indice y 1 es la cantidad de items que se va a quitar)
+                continue
+            }
+            if(splited_line[n+1] == " " || isLetterFromAlphabet(splited_line[n+1]) == false){
+                result = making_some_words.join("")
+                string_words.push(result)
+                validated_query.push(result)
+                //console.log(`string words: [${string_words}]`)
+                making_some_words = []
+            }
+
+        } else if(isSpecialCharacter(splited_line[n]) == true){
+            validated_query.push(splited_line[n])
+        } else if(isNumber(splited_line[n]) == true){
+            validated_query.push(splited_line[n])
+        } else {
+            console.log(`hay un caracter no valido: [${splited_line[n]}]`)
+            return
+        }
+    }
+    console.log(validated_query)
+}
 function main(){
     fs.readFile('query.txt', 'utf8', (err, data) => {
         if(err){
@@ -67,21 +99,9 @@ function main(){
         splited_string.pop() //esto se hace con el fin de quitar las comillas vacias al final de cadena_split
         for(let i = 0; i < splited_string.length; i++){
             splited_line = splited_string[i].split("")
-            for(let n = 0; n < splited_line.length; n++){
-                if(isSpecialCharacter(splited_line[n]) == true){
-                    validated_query.push(splited_line[n])
-                } else if(isLetterFromAlphabet(splited_line[n]) == true){
-                    validated_query.push(splited_line[n])
-                } else if(isNumber(splited_line[n]) == true){
-                    validated_query.push(splited_line[n])
-                } else {
-                    return 'wtf is this?'
-                }
-            }
+            console.log(splited_line)
+            validations(splited_line)
         }
-
-        console.log(validated_query)
-        wordsWithSense(validated_query)
     });
 }
 
