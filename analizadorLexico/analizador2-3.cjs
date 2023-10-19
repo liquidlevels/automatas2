@@ -1,10 +1,11 @@
 /* author: Luis Emmanuel Lopez Ortiz, 20760619
  * */
-var special_char = [" ","'",'"',"\\","%","_","?","`",",",";","*","="] 
+var special_char = [" ",".","'",'"',"\\","%","_","?","`",",",";","*","="] 
 var alphabet = ["A", "a", "B", "b", "C", "c", "D", "d", "E", "e", "F", "f", "G", "g", "H", "h", "I", "i", "J", "j", "K", "k", "L", "l", "M", "m", "N", "n", "O", "o", "P", "p", "Q", "q", "R", "r", "S", "s", "T", "t", "U", "u", "V", "v", "W", "w", "X", "x", "Y", "y", "Z", "z"]
 var number = ['0','1','2','3','4','5','6','7','8','9']
 var validated_query = []
 var making_some_words = []
+var making_some_numbers = []
 var splited_string
 var splited_line
 var result
@@ -200,7 +201,22 @@ function validations(splited_line){
         } else if(isSpecialCharacter(splited_line[n]) == true){
             validated_query.push(splited_line[n])
         } else if(isNumber(splited_line[n]) == true){
-            validated_query.push(splited_line[n])
+            making_some_numbers.push(splited_line[n])
+            console.log(`making some numbers: [${making_some_numbers}]`)
+            if(isNumber(splited_line[n+1]) == true){
+                continue
+            }
+            if(splited_line[n+1] == '.'){
+                making_some_numbers.push(splited_line[n+1])
+                continue
+            }
+            if(splited_line[n+1] == " " || isNumber(splited_line[n+1]) == false){
+                result = making_some_numbers.join("")
+                string_words.push(result)
+                validated_query.push(result)
+                making_some_numbers = []
+            }
+
         } else {
             console.log(`hay un caracter no valido: [${splited_line[n]}]`)
             return
