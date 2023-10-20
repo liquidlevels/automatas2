@@ -200,7 +200,13 @@ function validations(splited_line){
             }
         } else if(isSpecialCharacter(splited_line[n]) == true){
             validated_query.push(splited_line[n])
+
         } else if(isNumber(splited_line[n]) == true){
+            /*
+            if(splited_line[n-1] == "." && splited_line[n-2] == " "){
+                making_some_numbers.push(splited_line[n-1])
+                continue
+            }*/
             making_some_numbers.push(splited_line[n])
             console.log(`making some numbers: [${making_some_numbers}]`)
             if(isNumber(splited_line[n+1]) == true){

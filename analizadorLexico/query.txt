@@ -1,2 +1,2 @@
 SELECT * FROM
-    school_trash_madafaka WHERE age = 234.40;
+    school_trash_madafaka WHERE age = .40;
