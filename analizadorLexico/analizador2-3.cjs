@@ -1,6 +1,6 @@
 /* author: Luis Emmanuel Lopez Ortiz, 20760619
  * */
-var special_char = [" ",".","'",'"',"\\","%","_","?","`",",",";","*","="] 
+var special_char = [" ",".","'",'"',"\n","%","_","?","`",",",";","*","="] 
 var alphabet = ["A", "a", "B", "b", "C", "c", "D", "d", "E", "e", "F", "f", "G", "g", "H", "h", "I", "i", "J", "j", "K", "k", "L", "l", "M", "m", "N", "n", "O", "o", "P", "p", "Q", "q", "R", "r", "S", "s", "T", "t", "U", "u", "V", "v", "W", "w", "X", "x", "Y", "y", "Z", "z"]
 var number = ['0','1','2','3','4','5','6','7','8','9']
 var validated_query = []
@@ -32,6 +32,8 @@ const words = {
         18: ';',
         19: ',',
         20: '`',
+        21: "\n",
+        22: '.',
         30: '(',
         31: ')',
         32: '[',
@@ -233,21 +235,17 @@ function validations(splited_line){
 
 function toukens(validated_query, words){
     let tokens = []
-    const lengths = validated_query.length;
-    for (const [key, value] of Object.entries(words)) {
-        for (let i = 0; i < lengths; i++) {
-            if (validated_query[i] === value) {
-                tokens.push(key);
-                console.log(`value: [${value}]`);
-                validated_query.splice(i, 1)
-                console.log(validated_query[i])
-                break
-            } else if(isLetterFromAlphabet(validated_query[i]) == true){
-                console.log('palabra de usuario')
-            }
+    for(let i = 0; i < validated_query.length; i++){
+        for(let key in words){
+            if(validated_query[i] == words[key]){
+                console.log(`${key} es [${words[key]}]`)
+                tokens.push(key)
+                validated_query.splice(i,1)
+            } 
         }
     }
-    console.log('tokens:' + tokens)
+    console.log(validated_query)
+    console.log(tokens)
 }
 
 function main(){
@@ -260,6 +258,9 @@ function main(){
         splited_string.pop() //esto se hace con el fin de quitar las comillas vacias que hacia el data.split('\n') al final de cadena_split
         for(let i = 0; i < splited_string.length; i++){
             splited_line = splited_string[i].split("")
+            if(i+1 != splited_string.length){
+                splited_line.push('\n')
+            }
             console.log(splited_line)
             validations(splited_line)
             toukens(validated_query, words)
