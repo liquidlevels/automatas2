@@ -201,8 +201,12 @@ function validations(splited_line){
                 making_some_words = []
             }
         } else if(isSpecialCharacter(splited_line[n]) == true){
-            validated_query.push(splited_line[n])
-
+            if(splited_line[n] == '.' && isNumber(splited_line[n+1]) == true){
+                making_some_numbers.push(splited_line[n])
+            } else {
+                validated_query.push(splited_line[n])
+            }
+    
         } else if(isNumber(splited_line[n]) == true){
             /*
             if(splited_line[n-1] == "." && splited_line[n-2] == " "){
@@ -241,7 +245,16 @@ function toukens(validated_query, words){
                 console.log(`${key} es [${words[key]}]`)
                 tokens.push(key)
                 validated_query.splice(i,1)
+                if(string_words.some(word => word == validated_query[i]) == true){
+                    string_words.splice(i,1)
+                }
+                continue
             } 
+            if(validated_query[i] == words[1]){
+                //tokens.push() 
+                validated_query.splice(i,1)
+                continue
+            }
         }
     }
     console.log(validated_query)
