@@ -1,0 +1,9 @@
+SELECT
+  customers.name,
+  orders.order_number,
+  order_items.product_name,
+  order_items.quantity
+FROM customers
+INNER JOIN orders ON customers.id = orders.customer_id
+INNER JOIN order_items ON orders.id = order_items.order_id
+WHERE customers.name = 'John Doe';
