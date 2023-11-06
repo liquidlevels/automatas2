@@ -10,6 +10,7 @@ var splited_string
 var splited_line
 var result
 var string_words = []
+var da_tokens = []
 const fs = require('fs')
 const words = {
     1 : '.',
@@ -840,35 +841,15 @@ function toukens(validated_query, words){
                 console.log(`${key} es [${words[key]}]`)
                 tokens.push(key)
                 validated_query.splice(i,1)
-                /*for(let n = 0; n < string_words.length; i++){
-                    if(string_words[n] == validated_query[i]){
-                        string_words.splice(n,1)
-                        break
-                    }
-                }*/
-                /*if(string_words.some(word => word == validated_query[i]) == true){
-                    for(let n = 0; n < string_words.length; i++){
-                        if(string_words[n] == validated_query[i]){
-                            string_words.splice(n,1)
-                            break
-                        }
-                    }
-                }*/
-                continue
-            }
-            if(validated_query != words[key]){
-                console.log(`${key} no es? [${words[key]}]`)
-            }
-            if(validated_query[i] == (words[key] == 1)){
-                //tokens.push() 
-                validated_query.splice(i,1)
                 continue
             }
         }
     }
-    console.log(string_words)
-    console.log(validated_query)
+    //console.log(string_words)
+    //console.log(validated_query)
+    console.log('los toukens')
     console.log(tokens)
+    da_tokens.push(tokens)
 }
 
 function main(){
@@ -887,7 +868,9 @@ function main(){
             console.log(splited_line)
             validations(splited_line)
             //console.log(string_words)
-            //toukens(validated_query, words)
+            toukens(validated_query, words)
+            console.log('todos los toukens')
+            console.log(da_tokens)
         }
     });
 }
