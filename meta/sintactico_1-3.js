@@ -828,28 +828,28 @@ function validations(splited_line){
             return
         }
     }
-    console.log(validated_query)
 }
 
 function toukens(validated_query, words){
     let tokens = []
     for(let i = 0; i < validated_query.length; i++){
-        let test = validated_query[i]
-        let upper = test.toUpperCase()
-        for(let key in words){
+        for(const [key, value] of Object.entries(words)){
             if(validated_query[i] == words[key]){
-                console.log(`${key} es [${words[key]}]`)
+                console.log(`${key}: "${value}"`)
                 tokens.push(key)
-                validated_query.splice(i,1)
-                continue
+                for(let n = 0; n < string_words.length; n++){
+                    if(validated_query[i] == string_words[n])
+                        string_words.splice(n,1)
+                }
             }
         }
+        if(string_words.some(word => word == validated_query[i]) == true){
+            console.log(`999: "${validated_query[i]}"`)
+            tokens.push('999')
+        }
     }
-    //console.log(string_words)
-    //console.log(validated_query)
     console.log('los toukens')
     console.log(tokens)
-    da_tokens.push(tokens)
 }
 
 function main(){
@@ -865,12 +865,13 @@ function main(){
             if(i+1 != splited_string.length){
                 splited_line.push('\n')
             }
-            console.log(splited_line)
+            //console.log(splited_line)
             validations(splited_line)
             //console.log(string_words)
+            //console.log(validated_query)
             toukens(validated_query, words)
-            console.log('todos los toukens')
-            console.log(da_tokens)
+            //console.log('todos los toukens')
+            //console.log(da_tokens)
         }
     });
 }
