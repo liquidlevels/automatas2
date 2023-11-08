@@ -783,6 +783,22 @@ function isNumber(num){
 
 function validations(splited_line){
     for(let n = 0; n < splited_line.length; n++){
+        if(isLetterFromAlphabet(splited_line[n]) == true && splited_line[n-1] == "'"){
+            console.log(splited_line)
+            for(let a = n; a < splited_line.length; a++){
+                console.log(`${splited_line[a]}: ${a}`)
+                if(splited_line[a+1] == "'"){
+                    making_some_words.push(splited_line[a])
+                    break
+                } else {
+                    making_some_words.push(splited_line[a])
+                }
+            }
+            result = making_some_words.join("")
+            string_words.push(result)
+            validated_query.push(result)
+            making_some_words = []
+        }
         if(isLetterFromAlphabet(splited_line[n]) == true){
             making_some_words.push(splited_line[n])
             //console.log(`making some words: [${making_some_words}]`)
@@ -828,6 +844,7 @@ function validations(splited_line){
             return
         }
     }
+    console.log(validated_query)
 }
 
 function toukens(validated_query, words){
@@ -869,7 +886,7 @@ function main(){
             validations(splited_line)
             //console.log(string_words)
             //console.log(validated_query)
-            toukens(validated_query, words)
+            //toukens(validated_query, words)
             //console.log('todos los toukens')
             //console.log(da_tokens)
         }
