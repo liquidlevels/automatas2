@@ -786,13 +786,16 @@ function validations(splited_line){
         if(isLetterFromAlphabet(splited_line[n]) == true && splited_line[n-1] == "'"){
             console.log(splited_line)
             for(let a = n; a < splited_line.length; a++){
+                console.log(`n:${n}, a:${a}`)
                 console.log(`${splited_line[a]}: ${a}`)
                 if(splited_line[a+1] == "'"){
                     making_some_words.push(splited_line[a])
+                    n++
                     break
                 } else {
                     making_some_words.push(splited_line[a])
                 }
+                n++
             }
             result = making_some_words.join("")
             string_words.push(result)
