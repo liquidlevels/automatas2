@@ -43,6 +43,8 @@ const words = {
 	28: '[',
 	29: ']',
     30: "\n",
+    31: '<=',
+    32: '>=',
 
 	100 : "ACCESSIBLE",
 	101 : "ACCOUNT",
@@ -784,10 +786,7 @@ function isNumber(num){
 function validations(splited_line){
     for(let n = 0; n < splited_line.length; n++){
         if(isLetterFromAlphabet(splited_line[n]) == true && splited_line[n-1] == "'"){
-            console.log(splited_line)
             for(let a = n; a < splited_line.length; a++){
-                console.log(`n:${n}, a:${a}`)
-                console.log(`${splited_line[a]}: ${a}`)
                 if(splited_line[a+1] == "'"){
                     making_some_words.push(splited_line[a])
                     n++
@@ -888,10 +887,8 @@ function main(){
             //console.log(splited_line)
             validations(splited_line)
             //console.log(string_words)
-            //console.log(validated_query)
-            //toukens(validated_query, words)
-            //console.log('todos los toukens')
-            //console.log(da_tokens)
+            toukens(validated_query, words)
+            console.log(validated_query)
         }
     });
 }

@@ -187,7 +187,7 @@ function validations(splited_line){
     for(let n = 0; n < splited_line.length; n++){
         if(isLetterFromAlphabet(splited_line[n]) == true){
             making_some_words.push(splited_line[n])
-            console.log(`making some words: [${making_some_words}]`)
+            //console.log(`making some words: [${making_some_words}]`)
             if(splited_line[n+1] == "_"){
                 making_some_words.push(splited_line[n+1])
                 //utilice splice para quitar del array el "_" y que no lo agregue por separado y se duplique
@@ -208,13 +208,9 @@ function validations(splited_line){
             }
     
         } else if(isNumber(splited_line[n]) == true){
-            /*
-            if(splited_line[n-1] == "." && splited_line[n-2] == " "){
-                making_some_numbers.push(splited_line[n-1])
-                continue
-            }*/
+            
             making_some_numbers.push(splited_line[n])
-            console.log(`making some numbers: [${making_some_numbers}]`)
+           
             if(isNumber(splited_line[n+1]) == true){
                 continue
             }
@@ -240,23 +236,37 @@ function validations(splited_line){
 function toukens(validated_query, words){
     let tokens = []
     for(let i = 0; i < validated_query.length; i++){
+        let test = validated_query[i]
+        let upper = test.toUpperCase()
         for(let key in words){
             if(validated_query[i] == words[key]){
                 console.log(`${key} es [${words[key]}]`)
                 tokens.push(key)
                 validated_query.splice(i,1)
-                if(string_words.some(word => word == validated_query[i]) == true){
-                    string_words.splice(i,1)
-                }
+                /*for(let n = 0; n < string_words.length; i++){
+                    if(string_words[n] == validated_query[i]){
+                        string_words.splice(n,1)
+                        break
+                    }
+                }*/
+                /*if(string_words.some(word => word == validated_query[i]) == true){
+                    for(let n = 0; n < string_words.length; i++){
+                        if(string_words[n] == validated_query[i]){
+                            string_words.splice(n,1)
+                            break
+                        }
+                    }
+                }*/
                 continue
             } 
-            if(validated_query[i] == words[1]){
+            if(validated_query[i] == (words[key] == 1)){
                 //tokens.push() 
                 validated_query.splice(i,1)
                 continue
             }
         }
     }
+    console.log(string_words)
     console.log(validated_query)
     console.log(tokens)
 }
@@ -276,6 +286,7 @@ function main(){
             }
             console.log(splited_line)
             validations(splited_line)
+            //console.log(string_words)
             toukens(validated_query, words)
         }
     });

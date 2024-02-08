@@ -64,3 +64,12 @@ for(let i = 0; i < arreglo.length; i++){
 }
 
 console.log(arreglo_diccionario)
+
+//pako version
+
+for(let i = 0; i < arreglo.length; i++){
+    if(arreglo[i] == undefined){return}
+    arreglo_diccionario[arreglo[i]] = data[i]
+}
+
+console.log(arreglo_diccionario)
